@@ -30,19 +30,19 @@ def getMarker(x):
 def plotActions(num,df2,pitch,ax,marker):
     pitch.lines(df2[df2['playerId']==num].previousEndX,df2[df2['playerId']==num].previousEndY,
                 df2[df2['playerId']==num].x,df2[df2['playerId']==num].y,
-                color = 'white', ax=ax, zorder = 1)
+                color = 'white', ax=ax, zorder = 1,lw = 1)
     pitch.scatter(df2[df2['playerId']==num].x,df2[df2['playerId']==num].y,
                   color=df2[df2['playerId']==num].color, edgecolor = "white",
-                  marker = marker,ax = ax,s=400, zorder = 2)
+                  marker = marker,ax = ax,s=100, zorder = 2)
 
-fm_scada = FontManager(('https://github.com/googlefonts/scada/blob/main/fonts/ttf/'
-                        'Scada-Regular.ttf?raw=true'))
+# fm_scada = FontManager(('https://github.com/googlefonts/scada/blob/main/fonts/ttf/'
+#                         'Scada-Regular.ttf?raw=true'))
 
 mpl.rcParams['figure.dpi'] = 166
 
 pitch = VerticalPitch(pitch_type='opta', pitch_color='#4D4D53', line_color='#c7d5cc',line_zorder=2, half=True)
 
-fig, axs = pitch.grid(figheight=25, title_height=0.08, space=0.1, ncols = 2, nrows = 1,
+fig, axs = pitch.grid(figheight=9, title_height=0.08, space=0.1, ncols = 2, nrows = 1,
               # Turn off the endnote/title axis. I usually do this after
               # I am happy with the chart layout and text placement
               axis=False,
@@ -96,14 +96,14 @@ for count, ax in enumerate(axs['pitch'].flat):
         plotActions(400828,df_false,pitch,ax,"8")
         
 key = mlines.Line2D([], [], color='none', marker='^', linestyle='None',
-                          markersize=40, label='Big Chance', markeredgecolor = "white")
+                          markersize=20, label='', markeredgecolor = "white")
 
 key1 = mlines.Line2D([], [], color='green', marker='o', linestyle='None',
-                          markersize=40, label='Goal', markeredgecolor = "white")
+                          markersize=20, label='', markeredgecolor = "white")
 x2 = mlines.Line2D([], [], color='#ED2C0E', marker='o', linestyle='None',
-                          markersize=40, label='Miss', markeredgecolor = "white")
+                          markersize=20, label='', markeredgecolor = "white")
 
 
-plt.legend(handles=[key1,x2,key],  bbox_to_anchor = (0.61,0), 
-            facecolor = '#4D4D53', edgecolor = 'none', labelcolor = 'white', 
-            fontsize = 40, ncol = 3, columnspacing = 1)
+plt.legend(handles=[key1,x2,key],  bbox_to_anchor = (0.662,0), 
+            facecolor = '#4D4D53', edgecolor = 'none', labelcolor = '#4D4D53', 
+            fontsize = 40, ncol = 3, columnspacing = 0)
