@@ -70,6 +70,7 @@ df2['qualifiers'] = df2['qualifiers'].apply(ast.literal_eval)
 df2['qualifiers'] = df2['qualifiers'].apply(cleanQualifiers)
 
 df2 = df2[df2['type'] == "Pass"]
+df2 = df2[df2['outcomeType'] == "{'value': 1, 'displayName': 'Successful'}"]
 
 weigl_df = df2[(df2['playerId']==142318)]
 pizzi_df = df2[(df2['playerId']==81928)]
