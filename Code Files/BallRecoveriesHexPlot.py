@@ -28,7 +28,7 @@ fig, axs = pitch.grid(ncols = 2, nrows = 1,
 fig.set_facecolor('#565051')
 
 mapaCores = LinearSegmentedColormap.from_list("Flamingo - 100 colors",
-                                                  ['#e3aca7', '#c03a1d'], N=100)
+                                              ['#4D4D53', '#ED2C0E'], N=100)
 
 count = 0
 
@@ -38,9 +38,12 @@ allBallRecoveries1819 = pd.DataFrame()
 df2 = pd.read_csv("C:/Users/tomas/Documents/Benfica Data Driven Analysis/allEventsBenfica.csv")
 c1 = offensiveTransitionClass.offensiveTransitions(df2, 299)
 dicte = c1.getPossessionRecoveries("df")
-columns1 = ['type','x','y']
+columns1 = ['type','teamId','x','y']
 df1 = pd.DataFrame(dicte,columns = columns1)
 allBallRecoveries2021 = pd.concat([allBallRecoveries2021,df1])
+
+allBallRecoveries2021['x'].loc[allBallRecoveries2021['teamId'] != 299] = 100 - allBallRecoveries2021['x']
+allBallRecoveries2021['y'].loc[allBallRecoveries2021['teamId'] != 299] = 100 - allBallRecoveries2021['y']
     
 
 count = 0
@@ -48,18 +51,21 @@ count = 0
 df3 = pd.read_csv("C:/Users/tomas/Documents/Benfica Data Driven Analysis/allEventsBenfica1819.csv")
 c1 = offensiveTransitionClass.offensiveTransitions(df3, 299)
 dicte1 = c1.getPossessionRecoveries("df")
-columns1 = ['type','x','y']
+columns1 = ['type','teamId','x','y']
 df10 = pd.DataFrame(dicte1,columns = columns1)
 allBallRecoveries1819 = pd.concat([allBallRecoveries1819,df10])
+
+allBallRecoveries1819['x'].loc[allBallRecoveries1819['teamId'] != 299] = 100 - allBallRecoveries1819['x']
+allBallRecoveries1819['y'].loc[allBallRecoveries1819['teamId'] != 299] = 100 - allBallRecoveries1819['y']
     
 for count, ax in enumerate(axs['pitch'].flat):
     if(count == 0):
         hexmap = pitch.hexbin(allBallRecoveries1819.x, allBallRecoveries1819.y, ax=ax, edgecolors='black',
-                              gridsize=(10,10), cmap="Reds", linewidth = 1.5)
+                              gridsize=(10,10), cmap=mapaCores, linewidth = 1.2)
         
     else:
         hexmap = pitch.hexbin(allBallRecoveries2021.x, allBallRecoveries2021.y, ax=ax, edgecolors='black',
-                              gridsize=(10,10), cmap='Reds', linewidth = 1.5)
+                              gridsize=(10,10), cmap=mapaCores, linewidth = 1.2)
         
         
 cax = fig.add_axes([ax.get_position().x1+0.01,ax.get_position().y0+0.025,0.03,ax.get_position().height-0.05])        

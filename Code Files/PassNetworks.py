@@ -49,6 +49,8 @@ for count, ax in enumerate(axs['pitch'].flat):
     x = pd.DataFrame.from_dict(matchdata["events"])
     home = pd.DataFrame.from_dict(matchdata["home"],orient='index')
     away = pd.DataFrame.from_dict(matchdata["away"],orient='index')
+    # random_list = away[0]['formations'][1]
+    # print(random_list['formationName'])
     
     if(home[0]["teamId"] == 299):
         players_dict = home[0]["players"]

@@ -167,6 +167,8 @@ for root_dir in folderList:
         dribbles = events_spadl[(events_spadl['type_name']=='dribble') | ((events_spadl['type_name']=='pass') & (events_spadl['result_id'] == 1))]
         allDribblesAndPasses = pd.concat([allDribblesAndPasses,dribbles])
         
+allDribbles = allDribblesAndPasses[allDribblesAndPasses['type_name']=='dribble']
+allDribbles.to_csv("C:/Users/tomas/Benfica-20-21-Season-Analysis/Data/allDribbles.csv")
         
 df_allthree = allDribblesAndPasses[(allDribblesAndPasses['player_id']==135127) | (allDribblesAndPasses['player_id']==146760) | (allDribblesAndPasses['player_id']==148484)]
 
